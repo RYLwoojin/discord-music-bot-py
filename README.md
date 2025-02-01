@@ -6,7 +6,7 @@
 
 !skip to skip playing song(has bug rn)
 
-!quit to kick ass bot from chat
+!quit to kick bot's ass from chat
 
 _______________________________
 
