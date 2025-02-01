@@ -76,13 +76,13 @@ async def play_next(ctx):
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=bot.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(play_next(ctx), bot.loop))
-        await ctx.send(f'재생 중: {player.title}')
+        await ctx.send(f'Now playing: {player.title}')
 
 
 @bot.command(name="play")
 async def play(ctx, url: str):
     if not ctx.message.author.voice:
-        await ctx.send("먼저 음성 채널에 입장해야 합니다.")
+        await ctx.send("You must join a voice channel first.")
         return
 
     channel = ctx.message.author.voice.channel
@@ -96,10 +96,10 @@ async def play(ctx, url: str):
         player = await YTDLSource.from_url(url, loop=bot.loop, stream=True)
         if ctx.voice_client.is_playing():
             queue.append(url)
-            await ctx.send(f"현재 음악이 재생 중입니다. 대기열에 추가됨: {player.title}")
+            await ctx.send(f"A song is already playing. Added to queue: {player.title}")
         else:
             ctx.voice_client.play(player, after=lambda e: asyncio.run_coroutine_threadsafe(play_next(ctx), bot.loop))
-            await ctx.send(f'재생 중: {player.title}')
+            await ctx.send(f'Now playing :{player.title}')
 
 
 @bot.command(name="stop")
@@ -108,17 +108,17 @@ async def stop(ctx):
 
     if voice_client and voice_client.is_connected():
         await voice_client.disconnect()
-        await ctx.send("음악을 멈추고 봇이 퇴장했습니다.")
+        await ctx.send("Stopped music and disconnected the bot.")
     else:
-        await ctx.send("봇이 음성 채널에 있지 않습니다.")
+        await ctx.send("The bot is not in a voice channel.")
 
 
 @bot.command(name="list")
 async def waitlist(ctx):
     if queue:
-        await ctx.send("대기열: " + "\n".join(queue))
+        await ctx.send("Queue: " + "\n".join(queue))
     else:
-        await ctx.send("현재 대기열이 비어 있습니다.")
+        await ctx.send("The queue is currently empty.")
 
 
 
@@ -126,15 +126,15 @@ async def waitlist(ctx):
 async def skip(ctx):
     if ctx.voice_client and ctx.voice_client.is_playing():
         ctx.voice_client.stop()
-        await ctx.send("현재 곡을 스킵했습니다.")
+        await ctx.send("Skipped the current song.")
 
     else:
-        await ctx.send("현재 재생 중인 곡이 없습니다.")
+        await ctx.send("No song is currently playing..")
 
 @bot.command(name="quit")
 async def quitChat(ctx):
     if ctx.voice_client:
         await ctx.voice_client.disconnect()
-        await ctx.send("수고링")
+        await ctx.send("Goodbye!")
 
 bot.run(token1.tokenval)
