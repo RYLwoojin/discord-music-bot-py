@@ -1,4 +1,8 @@
 import asyncio
+import discord.opus
+
+if not discord.opus.is_loaded():
+    discord.opus.load_opus("/opt/homebrew/lib/libopus.dylib")
 
 import discord
 import yt_dlp
@@ -29,6 +33,14 @@ ytdl_format_options = {
 ffmpeg_options = {
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
     'options': '-vn'
+}
+
+ytdl_format_options = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'opus', 'preferredquality': '192'}],
+    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
+    'noplaylist': True,
+    'quiet': True
 }
 
 ytdl = yt_dlp.YoutubeDL(ytdl_format_options)
