@@ -9,6 +9,9 @@
 !quit to kick ass bot from chat
 
 
+
+-------------------------------
+
 pip install discord.py
 
 pip install PyNaCl
