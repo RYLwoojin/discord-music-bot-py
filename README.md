@@ -4,13 +4,19 @@
 
 !list to see waitlist
 
-!skip to skip playing song(has bug rn)
+!skip to skip playing song(has bug rn, give 10sec gap between !skip)
 
-!quit to kick bot's ass from chat
+!quit to say goodbye to bot
 
 _______________________________
 
 Python 3.10 
+
+macOS 15, Win11 Ready
+
+Don't monetize the code.
+
+Use only personal purpose.
 
 -------------------------------
 
