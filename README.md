@@ -19,7 +19,7 @@ Don't monetize the code.
 Use only personal purpose.
 
 -------------------------------
-
+```
 pip install discord.py
 
 pip install PyNaCl
@@ -29,3 +29,4 @@ pip install youtube_dl
 pip install yt_dlp
 
 pip install ffmpeg
+```
